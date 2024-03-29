@@ -1,0 +1,13 @@
+а) x=int(input())
+   if 2<=x<=20:
+      print("true")
+   else:
+      print("false")
+
+x=int(input())
+if -13<x<=-5:
+    print("true")
+elif -3<=x<=2:
+    print("true")
+else:
+    print("false")
