@@ -1,0 +1,7 @@
+from math import*
+v2=1
+u=0
+b=u+3*v2
+q=v2*tan(u**2)
+s1=(((b-4)*(q**2 - b))/(3*b + q))
+print(s1)
