@@ -1,0 +1,8 @@
+import numpy as np
+m = int(input("Введите размер массива C (не более 30): "))
+C = np.random.randint(-10, 10, size=m)  # генерируем случайный массив
+print("Исходный массив C:")
+print(C)
+sorted_C = np.concatenate((C[C>0], C[C<=0]))
+print("Преобразованный массив C:")
+print(sorted_C)
