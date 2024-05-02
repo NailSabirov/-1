@@ -1,1 +1,48 @@
+import numpy as np
+
+# Исходные данные
+S = 30
+G = 6
+K = 80301
+
+# Матрица коэффициентов и вектор свободных членов
+A = np.array([[1, 5, 1],
+              [4, -1, 1],
+              [S, G, 2*(S+G+K)]])
+B = np.array([S-G+K+10, S-G+4*K-2, 2*((S-G)*(S+G+K)+G)+K*S])
+
+# Начальное приближение
+X0 = np.array([0, 0, 0])
+
+# Метод простой итерации
+def simple_iteration_method(A, B, X0, max_iter=100, tol=1e-6):
+    n = len(B)
+    X = X0.copy()
+    for _ in range(max_iter):
+        X_new = np.zeros(n)
+        for i in range(n):
+            X_new[i] = (B[i] - A[i, :].dot(X_new) + A[i, i]*X_new[i]) / A[i, i]
+        if np.linalg.norm(X_new - X) < tol:
+            return X_new
+        X = X_new
+    return X
+
+# Решение СЛАУ методом простой итерации
+result_simple_iteration = simple_iteration_method(A, B, X0)
+print("Решение методом простой итерации:", result_simple_iteration)
+
+# Метод Зейделя
+def gauss_seidel_method(A, B, X0, max_iter=100, tol=1e-6):
+    n = len(B)
+    X = X0.copy()
+    for _ in range(max_iter):
+        for i in range(n):
+            X[i] = (B[i] - A[i, :i].dot(X[:i]) - A[i, i+1:].dot(X[i+1:])) / A[i, i]
+        if np.linalg.norm(A.dot(X) - B) < tol:
+            return X
+    return X
+
+# Решение СЛАУ методом Зейделя
+result_gauss_seidel = gauss_seidel_method(A, B, X0)
+print("Решение методом Зейделя:", result_gauss_seidel)
 
