@@ -1,0 +1,26 @@
+import numpy as np
+
+# Заданные значения
+G = 6
+S = 24
+p = 2*(G + S)
+m = -p + S
+
+# Создание матрицы A
+A = np.array([[p, m, 2*S],[m, 2*p + S, m],[2*S, m, p]]) / 6
+
+# Вычисление собственных значений и собственных векторов
+eigenvalues, eigenvectors = np.linalg.eig(A)
+# Нахождение максимального по модулю собственного значения
+max_eigenvalue_index = np.argmax(np.abs(eigenvalues))
+max_eigenvalue = eigenvalues[max_eigenvalue_index]
+max_eigenvector = eigenvectors[:, max_eigenvalue_index]
+
+print("Собственные значения матрицы A:")
+print(eigenvalues)
+print("\nСобственные векторы матрицы A:")
+print(eigenvectors)
+print("\nМаксимальное по модулю собственное значение:")
+print(max_eigenvalue)
+print("\nСоответствующий ему собственный вектор:")
+print(max_eigenvector)
